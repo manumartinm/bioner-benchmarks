@@ -1,0 +1,62 @@
+{
+    "dmis-lab/biobert-v1.1_ncbi": {
+        "eval_loss": 0.08928644694387913,
+        "precision": 0.9215876089060987,
+        "recall": 0.9529529529529529,
+        "f1_score": 0.937007874015748
+    },
+    "dmis-lab/biobert-v1.1_bc2gm": {
+        "eval_loss": 0.15411703310906888,
+        "precision": 0.9081366678407891,
+        "recall": 0.9083286358511837,
+        "f1_score": 0.9082326417021875
+    },
+    "dmis-lab/biobert-v1.1_linnaeus": {
+        "eval_loss": 0.029086877107347833,
+        "precision": 0.9347705914870094,
+        "recall": 0.8083173996175909,
+        "f1_score": 0.8669571904639836
+    },
+    "dmis-lab/biobert-v1.1_bc5dr": {
+        "eval_loss": 0.5060884594917298,
+        "precision": 0.8226034665723382,
+        "recall": 0.8785417453721194,
+        "f1_score": 0.849652904640117
+    },
+    "dmis-lab/biobert-v1.1_jnlpba": {
+        "eval_loss": 0.523908868432045,
+        "precision": 0.6937833037300177,
+        "recall": 0.7746925823086077,
+        "f1_score": 0.732008995502249
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext_ncbi": {
+        "eval_loss": 0.15016020983457565,
+        "precision": 0.8906174039863879,
+        "recall": 0.9037987173162308,
+        "f1_score": 0.8971596474045054
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext_linnaeus": {
+        "eval_loss": 0.03346751319337374,
+        "precision": 0.9451754385964912,
+        "recall": 0.7937384898710865,
+        "f1_score": 0.8628628628628628
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext_bc2gm": {
+        "eval_loss": 0.20759609639644622,
+        "precision": 0.8732787866693275,
+        "recall": 0.8873867784236853,
+        "f1_score": 0.8802762597646427
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext_bc5dr": {
+        "eval_loss": 0.32343701720237733,
+        "precision": 0.8305035971223022,
+        "recall": 0.6962605548854041,
+        "f1_score": 0.7574803149606298
+    },
+    "microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext_jnlpba": {
+        "eval_loss": 0.5442526675760746,
+        "precision": 0.6549628629304524,
+        "recall": 0.7542768273716952,
+        "f1_score": 0.7011203469461511
+    }
+}

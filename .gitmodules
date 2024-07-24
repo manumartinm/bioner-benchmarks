@@ -1,0 +1,6 @@
+[submodule "aioner"]
+	path = AIONER
+	url = https://github.com/manumartinm/AIONER
+[submodule "vaner"]
+	path = VANER
+	url = https://github.com/manumartinm/VANER

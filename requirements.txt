@@ -1,0 +1,7 @@
+pandas
+datasets
+transformers
+tensorflow
+seqeval
+sklearn
+numpy
