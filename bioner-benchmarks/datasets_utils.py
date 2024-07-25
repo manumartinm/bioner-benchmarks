@@ -40,11 +40,9 @@ def parse_bcdr_to_format(df: pd.DataFrame, entity_map: Optional[Dict[int, str]])
 
       labels = ['O'] * len(token_offsets)
       for entity in entities:
-          entity_text = entity['text'][0]
           entity_offsets = entity['offsets'][0]
           start_offset, end_offset = entity_offsets
 
-          # Encontrar los tokens correspondientes a la entidad
           for i, (start, end) in enumerate(token_offsets):
               if start >= start_offset and end <= end_offset:
                   if labels[i] == 'O' and ((i - 1) < 0 or labels[i - 1] == 'B'):
@@ -52,7 +50,6 @@ def parse_bcdr_to_format(df: pd.DataFrame, entity_map: Optional[Dict[int, str]])
                   else:
                       labels[i] = 'I-' + entity['type']
 
-      # Agregar los tokens y etiquetas al nuevo dataset
       for i, token in enumerate(tokens):
           new_data.append({
             'words': token,
@@ -65,7 +62,7 @@ def parse_bcdr_to_format(df: pd.DataFrame, entity_map: Optional[Dict[int, str]])
   return format_df
 
 
-def from_hf_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]]) -> List[str]:
+def from_hf_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]], add_entities: Optional[bool] = True) -> List[str]:
     data = []
     for index, row in df.iterrows():
         tokens = row['tokens']
@@ -74,6 +71,10 @@ def from_hf_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]]) 
         text = ' '.join(tokens)
         line = f'{sentence_id}|t|\n'
         line += f'{sentence_id}|a|{text}\n'
+
+        if not add_entities:
+            data.append(line)
+            continue
 
         entity = ""
         start = None
@@ -92,7 +93,6 @@ def from_hf_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]]) 
                     entity = ""
                     start = None
 
-        # Add the last entity if it exists
         if entity:
             line += f'{sentence_id}\t{start}\t{i+1}\t{entity}\t{entity_label[2:]}\n'
 
@@ -100,7 +100,7 @@ def from_hf_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]]) 
 
     return data
 
-def parse_bcdr_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]] = None) -> List[str]:
+def parse_bcdr_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]] = None, add_entities: Optional[bool] = True) -> List[str]:
     new_data = []
 
     for index, row in df.iterrows():
@@ -114,8 +114,10 @@ def parse_bcdr_to_pubtator(df: pd.DataFrame, entity_map: Optional[Dict[int, str]
             type = passage['type']
             document_lines.append(f'{document_id}|{type[0].lower()}|{text}\n')
 
+            if not add_entities:
+                continue
+
             for entity in passage.get('entities', []):
-                entity_id = entity['id']
                 entity_offsets = entity['offsets'][0]
                 start_offset = entity_offsets[0]
                 end_offset = entity_offsets[1]
@@ -147,7 +149,6 @@ jnlpba_mapping = {
     9: 'B-protein',
     10: 'I-protein'
 }
-
 
 datasets_map = {
     "ncbi": {

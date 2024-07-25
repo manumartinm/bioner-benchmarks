@@ -11,5 +11,5 @@ cd ..
 
 cd ./AIONER
 
-poetry lock --no-update
-poetry install
+bash ./setup.sh
+pip install -r requirements.txt

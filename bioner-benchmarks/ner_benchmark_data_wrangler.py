@@ -1,5 +1,5 @@
 from datasets import load_dataset
-from typing import List
+from typing import List, Optional
 import pandas as pd
 
 class NERBenchmarkDataWrangler:
@@ -53,9 +53,9 @@ class NERBenchmarkDataWrangler:
         df = self._get_dataframe_by_type(type)
         return self.parse_function(df, self.entity_map)
 
-    def to_pubtator(self, type: str) -> List[str]:
+    def to_pubtator(self, type: str, add_entities: Optional[bool] = True) -> List[str]:
         df = self._get_dataframe_by_type(type)
-        return self.to_pubtator_fn(df, self.entity_map)
+        return self.to_pubtator_fn(df, self.entity_map, add_entities)
 
     def get_labels(self) -> List[str]:
         parsed_data = self.get_format_data('train')

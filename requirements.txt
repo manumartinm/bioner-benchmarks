@@ -6,3 +6,5 @@ seqeval
 sklearn
 numpy
 poetry
+bioc
+simpletransformers
