@@ -25,9 +25,9 @@ def from_hf_tokens_to_valid(df: pd.DataFrame, entity_map: Optional[Dict[int, str
 
   return format_df
 
-def parse_bcdr_to_format(df: pd.DataFrame, entity_map: Optional[Dict[int, str]]) -> pd.DataFrame:
+def parse_bcdr_to_format(df: pd.DataFrame, entity_map: Optional[Dict[int, str]], model: Optional[str]) -> pd.DataFrame:
   new_data = []
-  checkpoint_path = '/content/AIONER/pretrained_models/bioformer-cased-v1.0/'
+  checkpoint_path = model if model else "NeuML/pubmedbert-base-embeddings"
 
   tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, use_fast=True, do_lower_case=True)
 
